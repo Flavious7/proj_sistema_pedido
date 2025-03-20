@@ -1,0 +1,62 @@
+# version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    container_name: postgres_db
+    restart: always
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    container_name: django_backend
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: db
+      DB_PORT: 5432
+      DOCKERIZED: "True"
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app:cached
+    command: >
+      sh -c "echo 'Aguardando banco de dados...' &&
+             sleep 10 &&
+             python hotelproject/manage.py migrate &&
+             python hotelproject/manage.py runserver 0.0.0.0:8000"
+
+  wso2mi:
+    image: wso2/wso2mi:4.3.0-alpine
+    container_name: wso2mi
+    restart: always
+    depends_on:
+      - db
+      - backend
+    ports:
+      - "8290:8290"  # Porta de entrada para APIs
+    environment:
+      - WSO2_MI_PROFILE=default  # Perfil de execução do WSO2 MI
+    volumes:
+      - wso2mi_data:/home/wso2carbon/wso2mi-4.3.0/repository/deployment/server
+      - ./ValidarPedidoAPI.xml:/home/wso2carbon/wso2mi-4.3.0/repository/deployment/server/synapse-configs/default/api/ValidarPedidoAPI.xml
+      - ./deployment.toml:/home/wso2carbon/wso2mi-4.3.0/conf/deployment.toml
+
+volumes:
+  postgres_data:
+  wso2mi_data:

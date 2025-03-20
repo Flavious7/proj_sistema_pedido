@@ -1,0 +1,311 @@
+type: collection.insomnia.rest/5.0
+name: Empresa
+meta:
+  id: wrk_16c3c4418ffd4bf0a186fec84e81aed6
+  created: 1742317275622
+  modified: 1742317275622
+collection:
+  - name: Empresa
+    meta:
+      id: fld_810f6d537bf44be9b29123b011c4fce1
+      created: 1739720350906
+      modified: 1741642481004
+      sortKey: -1728792041063.5
+    children:
+      - url: http://127.0.0.1:8000/app/empresa
+        name: GET empresas
+        meta:
+          id: req_75ebd038833443fb9f0681676517679a
+          created: 1739720350908
+          modified: 1741641731875
+          isPrivate: false
+          sortKey: -1739719303156
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://127.0.0.1:8000/app/empresa/1
+        name: GET Empresa
+        meta:
+          id: req_a6471057d2544e87b34901c670bccf33
+          created: 1739720350910
+          modified: 1741641633180
+          isPrivate: false
+          sortKey: -1739719406269
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://127.0.0.1:8000/app/empresa/create
+        name: POST Empresa
+        meta:
+          id: req_cb0ff8ad1ff94b459e27dc24f5ed3fe8
+          created: 1739720350914
+          modified: 1741641821234
+          isPrivate: false
+          sortKey: -1739719523518
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome":"Moura Company",
+            	"NIF": "17834734",
+            	"email": "moura_company@gmail.com"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/10.3.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://127.0.0.1:8000/app/empresa/update/1
+        name: PUT Empresa
+        meta:
+          id: req_1ad929dfee9c4a3ab1f7c9593c929c30
+          created: 1739720350916
+          modified: 1741641887167
+          isPrivate: false
+          sortKey: -1739719771833
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome":"Moura Company"
+            	
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/10.3.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://127.0.0.1:8000/app/empresa/delete/1
+        name: DELETE Empresa
+        meta:
+          id: req_e7bd8c0687a54b02862bdfef8f0e318e
+          created: 1739720350918
+          modified: 1741641893549
+          isPrivate: false
+          sortKey: -1739719854192
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Pedido
+    meta:
+      id: fld_e3be0736d5d94a3b8018e163d573b1b2
+      created: 1739720753051
+      modified: 1741642483978
+      sortKey: -1723328431930.75
+    children:
+      - url: http://127.0.0.1:8000/app/pedido
+        name: GET Pedidos
+        meta:
+          id: req_86a4339fcbd14caf8eb628c8f5c3bb7f
+          created: 1739720753053
+          modified: 1741641916286
+          isPrivate: false
+          sortKey: -1739719303156
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://127.0.0.1:8000/app/pedido/1
+        name: GET Pedido
+        meta:
+          id: req_7f666d6cb72848debacc619217c678a6
+          created: 1739720753054
+          modified: 1741641921869
+          isPrivate: false
+          sortKey: -1739719406269
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://127.0.0.1:8000/app/pedido/create
+        name: POST Pedido
+        meta:
+          id: req_eb14afa7d6e844a69575bf47125801b5
+          created: 1739720753056
+          modified: 1742428005138
+          isPrivate: false
+          sortKey: -1739719523518
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"empresa_id": 2,
+            	"tipo":"Aquisição",
+            	"descricao": "",
+            	"valor" : 2000,
+            	"data_submissao": "2024-03-02",
+            	"estado": "pendente"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/10.3.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://127.0.0.1:8000/app/pedido/update/1
+        name: PUT Pedido
+        meta:
+          id: req_f8ba850da1b04a99b73bc0fdd3bf225a
+          created: 1739720753057
+          modified: 1742427927594
+          isPrivate: false
+          sortKey: -1739719771833
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+
+            	"empresa_id": 2,
+            	"valor" : 2.500
+
+            	
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/10.3.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://127.0.0.1:8000/app/pedido/delete/1
+        name: DELETE Pedido
+        meta:
+          id: req_76bb276bee1d404a9d60a88ebb32f017
+          created: 1739720753058
+          modified: 1741642348338
+          isPrivate: false
+          sortKey: -1739719854192
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - url: http://localhost:8290/validarpedido
+    name: Validar Pedido
+    meta:
+      id: req_604b2f3d77e443f48f5cf5e4dda61ff3
+      created: 1742333507412
+      modified: 1742501102632
+      isPrivate: false
+      sortKey: -1742333507412
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"empresa_id": 2,
+        	"tipo":"Aquisição",
+        	"descricao": "",
+        	"valor" : 2000,
+        	"data_submissao": "2024-03-02",
+        	"estado": "pendente"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.0.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_16463f9007194dabb550c8547e83de88
+    created: 1739719245784
+    modified: 1739719245784
+environments:
+  name: Base Environment
+  meta:
+    id: env_34bdf3f9129d4948a4bf528e409fd670
+    created: 1739719245781
+    modified: 1739719245781
+    isPrivate: false

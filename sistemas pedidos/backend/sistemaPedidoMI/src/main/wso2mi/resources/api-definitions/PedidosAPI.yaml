@@ -1,0 +1,13 @@
+openapi: 3.0.1
+info:
+  title: PedidosAPI
+  description: API Definition of PedidosAPI
+  version: 1.0.0
+servers:
+- url: http://localhost:8290/pedidos
+paths:
+  /:
+    get:
+      responses:
+        default:
+          description: Default response
