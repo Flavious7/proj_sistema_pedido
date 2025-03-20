@@ -1,56 +1,74 @@
-# proj_sistema_pedido
-Documentação do Projeto - Endpoints e Fluxo WSO2 MI
-Instruções de Instalação e Uso
+# Projeto Sistema de Gestão de Pedidos
 
-Para instalar e executar o projeto, siga estes passos:
+Este repositório contém a documentação técnica, instruções de instalação e descrição detalhada dos endpoints e do fluxo desenvolvido com WSO2 Micro Integrator para o projeto **Sistema de Gestão de Pedidos**.
 
-1. Certifique-se de que tem o Docker e Docker Compose instalados na sua máquina.
+---
 
-2. Navegue até à pasta do projeto:
-   cd \sistemas pedidos-Beta1\sistemas pedidos\backend
+## 📋 Instruções de Instalação e Uso
 
-3. Inicialize os containers Docker com o comando:
-   docker-compose up
+Siga os passos abaixo para executar o projeto localmente:
 
-4. Após os containers serem inicializados com sucesso:
-   - Backend estará disponível em: http://127.0.0.1:8000
-   - WSO2 Micro Integrator estará disponível em: http://localhost:8290
+### Pré-requisitos
+- Docker
+- Docker Compose
 
-Agora, pode utilizar o Insomnia ou outra ferramenta similar para realizar requisições HTTP aos endpoints descritos acima.
-Endpoints Utilizados no Insomnia
+### Execução
 
-Empresa:
-GET - Listar empresas: http://127.0.0.1:8000/app/empresa
-GET - Obter detalhes da empresa por ID: http://127.0.0.1:8000/app/empresa/{id}
-POST - Criar nova empresa: http://127.0.0.1:8000/app/empresa/create
-PUT - Atualizar empresa existente: http://127.0.0.1:8000/app/empresa/update/{id}
-DELETE - Remover empresa: http://127.0.0.1:8000/app/empresa/delete/{id}
+1. **Navegue até à pasta do projeto:**
 
-Pedido:
-GET - Listar todos os pedidos: http://127.0.0.1:8000/app/pedido
-GET - Obter detalhes do pedido por ID: http://127.0.0.1:8000/app/pedido/{id}
-POST - Criar novo pedido: http://127.0.0.1:8000/app/pedido/create
-PUT - Atualizar pedido existente: http://127.0.0.1:8000/app/pedido/update/{id}
-DELETE - Remover pedido: http://127.0.0.1:8000/app/pedido/delete/{id}
+```bash
+cd "\sistemas pedidos-Beta1\sistemas pedidos\backend"
+```
 
-WSO2 Micro Integrator:
-POST - Validar Pedido (WSO2): http://localhost:8290/validarpedido
+2. **Inicialize os containers Docker:**
 
+```bash
+docker-compose up
+```
 
-Fluxo criado no WSO2 Micro Integrator
+3. **Aguarde que os serviços sejam inicializados.** Após isso:
 
-Utilizámos o Dashboard do WSO2 Micro Integrator para criar o seguinte fluxo:
+- Backend estará disponível em: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+- WSO2 Micro Integrator estará disponível em: [http://localhost:8290](http://localhost:8290)
 
-1. O backend envia uma requisição HTTP (endpoint acima: /validarpedido) contendo as informações de um pedido.
-2. O WSO2 MI recebe essa requisição e executa as seguintes etapas no fluxo criado:
-   - Filtragem por valor:
-     - Se o valor for inferior a 1000€, o pedido é aprovado automaticamente.
-     - Se o valor exceder 1000€, o pedido fica pendente para aprovação manual, simulando a integração com um sistema externo.
+Agora pode utilizar o Insomnia ou ferramentas semelhantes para realizar requisições HTTP aos endpoints descritos abaixo.
 
-   - Resposta:
-     - Após a decisão do fluxo, o WSO2 MI retorna uma resposta HTTP ao backend contendo o novo estado (APROVADO ou PENDENTE).
+---
 
-3. Após desenharmos esse fluxo visualmente no Dashboard do WSO2 MI, exportámos a configuração em formato XML e incluímo-la diretamente no nosso projeto. Em seguida, utilizámos a funcionalidade de volume mounts do Docker Compose para carregar automaticamente o ficheiro XML dentro do container do WSO2 MI durante a sua inicialização.
+## 🔗 Endpoints Utilizados no Insomnia
 
-Deste modo, garantimos uma integração simples, clara e funcional entre o Backend, WSO2 MI e a base de dados PostgreSQL, conforme solicitado pelo projeto.
+### 📌 Empresa:
+- `GET` **Listar empresas**: `http://127.0.0.1:8000/app/empresa`
+- `GET` **Detalhes da empresa por ID**: `http://127.0.0.1:8000/app/empresa/{id}`
+- `POST` **Criar nova empresa**: `http://127.0.0.1:8000/app/empresa/create`
+- `PUT` **Atualizar empresa existente**: `http://127.0.0.1:8000/app/empresa/update/{id}`
+- `DELETE` **Remover empresa**: `http://127.0.0.1:8000/app/empresa/delete/{id}`
 
+### 📌 Pedido:
+- `GET` **Listar todos os pedidos**: `http://127.0.0.1:8000/app/pedido`
+- `GET` **Detalhes do pedido por ID**: `http://127.0.0.1:8000/app/pedido/{id}`
+- `POST` **Criar novo pedido**: `http://127.0.0.1:8000/app/pedido/create`
+- `PUT` **Atualizar pedido existente**: `http://127.0.0.1:8000/app/pedido/update/{id}`
+- `DELETE` **Remover pedido**: `http://127.0.0.1:8000/app/pedido/delete/{id}`
+
+### 📌 WSO2 Micro Integrator:
+- `POST` **Validar Pedido**: `http://localhost:8290/validarpedido`
+
+---
+
+## ⚙️ Fluxo WSO2 Micro Integrator
+
+O fluxo criado no **Dashboard do WSO2 Micro Integrator** funciona da seguinte forma:
+
+1. O backend envia uma requisição HTTP (`/validarpedido`) com os detalhes do pedido.
+2. O WSO2 MI executa:
+   - **Filtragem por valor:**
+     - Valor inferior a **1000€** → Pedido aprovado automaticamente.
+     - Valor superior a **1000€** → Pedido fica pendente para aprovação manual (integração simulada com sistema externo).
+
+   - **Resposta:**
+     - Retorna uma resposta HTTP ao backend com o estado atualizado (**APROVADO** ou **PENDENTE**).
+
+3. O fluxo desenhado no Dashboard é exportado como ficheiro XML e integrado diretamente no projeto, sendo carregado automaticamente pelo Docker Compose (volume mounts) no container do WSO2 MI durante o arranque.
+
+Desta forma, garantimos uma integração robusta, escalável e eficiente entre o Backend, o WSO2 Micro Integrator e a base de dados PostgreSQL, atendendo integralmente aos requisitos do projeto.
